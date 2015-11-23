@@ -7,6 +7,10 @@
 
 import argparse
 import csv
+import math
+import CandidateGenerator
+import LargeItemsetGenerator
+
 
 #################### New Classification, Sampling and Summary Session #################################
 parser = argparse.ArgumentParser(prog='ADB Project 3', description = 'how to use the script')
@@ -20,20 +24,40 @@ minSup = float(args.msup)
 minConf = float(args.mconf)
 
 print "filePath: "+ filePath
-print minSup
-print minConf
-
-#collection of market baskets
-baskets = []
+#collection of market baskets: (TID: [items])
+baskets = {}
 
 with open(filePath, 'rU') as csvFile:
 	fileReader = csv.reader(csvFile, delimiter = ',', quotechar = '"')
+	i = 0
 	for row in fileReader:
-		baskets.append(row)
+		baskets[i] = row
+		i+=1
 
 # should skip first row
-i = 1
-while i<10:
-	print ','.join(baskets[i])
-	print '\n'
-	i += 1
+baskets.pop(0)
+## changed into absolute minimum support and confidence count
+minSup = math.floor(len(baskets)*minSup)
+minConf = math.floor(len(baskets)*minConf)
+print minSup
+print minConf
+
+# transform baskets to initial large 1-itemset
+iniItemSet = list(set().union(*baskets.values()))
+iniCanItemset = []
+for item in iniItemSet:
+	if item != '' and item is not None:
+		iniCanItemset.append([item])
+iniLargeItemset = LargeItemsetGenerator.ItemsetGenerator(iniCanItemset, baskets, minSup).genLargeItemset()
+
+canItemset = CandidateGenerator.Generator(iniLargeItemset).genCandidate()
+for i in range(10):
+	print canItemset[i]
+
+
+
+# Generate large itemset
+
+
+
+# Generate Association rules
