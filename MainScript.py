@@ -39,8 +39,8 @@ baskets.pop(0)
 ## changed into absolute minimum support and confidence count
 minSup = math.floor(len(baskets)*minSup)
 minConf = math.floor(len(baskets)*minConf)
-print minSup
-print minConf
+print 'Absolute minimum support count: '+ str(minSup)
+print 'Absolute minimum confidence count: ' + str(minConf)
 
 # transform baskets to initial large 1-itemset
 iniItemSet = list(set().union(*baskets.values()))
@@ -48,9 +48,14 @@ iniCanItemset = []
 for item in iniItemSet:
 	if item != '' and item is not None:
 		iniCanItemset.append([item])
-iniLargeItemset = LargeItemsetGenerator.ItemsetGenerator(iniCanItemset, baskets, minSup).genLargeItemset()
+print 'Generating set of large itemsets'
+iniLargeItemset = LargeItemsetGenerator.ItemsetGenerator(baskets, minSup).genLargeItemset(iniCanItemset)
 
-canItemset = CandidateGenerator.Generator(iniLargeItemset).genCandidate()
+canItemset = CandidateGenerator.Generator().genCandidate(iniLargeItemset)
+canItemset = CandidateGenerator.Generator().genCandidate(canItemset)
+
+
+print '='*20
 for i in range(10):
 	print canItemset[i]
 
