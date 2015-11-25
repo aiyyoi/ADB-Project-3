@@ -16,6 +16,7 @@ class Generator:
 		self.priLargeItemset = priLargeItemset
 		curCandidateItemset = []
 		k = len(self.priLargeItemset[0])
+		print 'at k = '+ str(k+1)
 		maxIter = len(self.priLargeItemset)
 		#join step
 		if k<2:
@@ -32,7 +33,7 @@ class Generator:
 					cp = copy.deepcopy(self.priLargeItemset[i])
 					if set(common).issubset( self.priLargeItemset[j] ):
 						cp.update(self.priLargeItemset[j])
-						if len(cp) == (k+1) and self.prune(cp):
+						if len(cp) == (k+1) and self.prune(cp) and cp not in curCandidateItemset:
 							curCandidateItemset.append(cp)
 		return curCandidateItemset
 

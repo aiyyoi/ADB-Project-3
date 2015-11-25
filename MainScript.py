@@ -8,8 +8,7 @@
 import argparse
 import csv
 import math
-import CandidateGenerator
-import LargeItemsetGenerator
+import Apriori
 
 
 #################### New Classification, Sampling and Summary Session #################################
@@ -48,21 +47,14 @@ iniCanItemset = []
 for item in iniItemSet:
 	if item != '' and item is not None:
 		iniCanItemset.append([item])
-print 'Generating set of large itemsets'
-iniLargeItemset = LargeItemsetGenerator.ItemsetGenerator(baskets, minSup).genLargeItemset(iniCanItemset)
+print 'Generating set of large itemsets ...'
 
-canItemset = CandidateGenerator.Generator().genCandidate(iniLargeItemset)
-canItemset = CandidateGenerator.Generator().genCandidate(canItemset)
-
+apriori = Apriori.AprioriInstance(baskets, minSup, iniCanItemset)
+answer = apriori.aprioriLogic()
 
 print '='*20
-for i in range(10):
-	print canItemset[i]
-
-
-
-# Generate large itemset
-
+for each in answer:
+	print each
 
 
 # Generate Association rules

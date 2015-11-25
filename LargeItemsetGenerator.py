@@ -10,6 +10,9 @@ class ItemsetGenerator:
 		self.minSup = minSup
 
 
+	'''
+		Essentially a high pass filter
+	'''
 	def genLargeItemset(self, canItemset):
 		self.candidateSet = [] # keeps each itemset member, count 0 at initialization
 		for eachSet in canItemset:
