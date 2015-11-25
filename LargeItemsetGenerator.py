@@ -18,6 +18,7 @@ class ItemsetGenerator:
 		for eachSet in canItemset:
 			self.candidateSet.append(MemberClass.Member(eachSet))
 		# update support counts for each candidate itemset
+		print 'Filter large itemsets'
 		largeItemset = [] # the keyset of large itemset
 		for eachMember in self.candidateSet:
 			count = sum(set(eachMember.getItemSet()).issubset(eachTransaction) for eachTransaction in self.baskets.values())

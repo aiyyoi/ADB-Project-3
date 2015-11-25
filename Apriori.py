@@ -19,5 +19,7 @@ class AprioriInstance:
 			ptLargeItemset = self.largeItemsetGenerator.genLargeItemset(canItemset)
 			if len(ptLargeItemset)>0:
 				answer.extend(ptLargeItemset)
+			else:
+				print 'No more large itemsets...'
 
 		return answer

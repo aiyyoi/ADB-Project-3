@@ -16,7 +16,7 @@ class Generator:
 		self.priLargeItemset = priLargeItemset
 		curCandidateItemset = []
 		k = len(self.priLargeItemset[0])
-		print 'at k = '+ str(k+1)
+		print 'Generating candidates at k = '+ str(k+1)
 		maxIter = len(self.priLargeItemset)
 		#join step
 		if k<2:
