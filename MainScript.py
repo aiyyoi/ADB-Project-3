@@ -37,7 +37,6 @@ with open(filePath, 'rU') as csvFile:
 baskets.pop(0)
 ## changed into absolute minimum support and confidence count
 minSup = math.floor(len(baskets)*minSup)
-minConf = math.floor(len(baskets)*minConf)
 print 'Absolute minimum support count: '+ str(minSup)
 print 'Absolute minimum confidence count: ' + str(minConf)
 
