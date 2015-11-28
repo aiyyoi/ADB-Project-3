@@ -9,7 +9,7 @@ import argparse
 import csv
 import math
 import Apriori
-
+import itertools
 
 #################### New Classification, Sampling and Summary Session #################################
 parser = argparse.ArgumentParser(prog='ADB Project 3', description = 'how to use the script')
@@ -58,3 +58,22 @@ for each in answer:
 
 
 # Generate Association rules
+for a in answer:
+	for i in range(1,length(a.getItemSet())):
+		S = a.getItemSet()
+		sub =  set(itertools.combinations(S, m))
+		for s in sub:
+			diff = S.difference(sub)
+			sup_l = a.getSupportCount()
+			sup_subs = 0
+			flag1 = 0
+		
+			for j in answer:
+				if set(j) == set(s):
+					sup_subs = j.getSupportCount()
+					flag1 = 1	
+				if flag1 == 1:
+					break
+
+		if(float(sup_l) / sup_subs >= minConf
+			print ', '.join(s) + "=>" + ', '.join(diff)
