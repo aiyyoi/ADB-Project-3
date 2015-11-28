@@ -15,7 +15,10 @@ class AprioriInstance:
 		answer = [] # all large itemsets found are to be appended
 		ptLargeItemset = self.iniLargeItemset
 		while len(ptLargeItemset) >0:
-			canItemset = self.canItemsetGenerator.genCandidate(ptLargeItemset)
+			last = []
+			for eachMember in ptLargeItemset:
+				last.append(eachMember.getItemSet())
+			canItemset = self.canItemsetGenerator.genCandidate(last)
 			ptLargeItemset = self.largeItemsetGenerator.genLargeItemset(canItemset)
 			if len(ptLargeItemset)>0:
 				answer.extend(ptLargeItemset)

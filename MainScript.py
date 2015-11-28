@@ -38,7 +38,7 @@ baskets.pop(0)
 ## changed into absolute minimum support and confidence count
 minSup = math.floor(len(baskets)*minSup)
 print 'Absolute minimum support count: '+ str(minSup)
-print 'Absolute minimum confidence count: ' + str(minConf)
+print 'Minimum confidence: ' + str(minConf)
 
 # transform baskets to initial large 1-itemset
 iniItemSet = list(set().union(*baskets.values()))
@@ -53,12 +53,12 @@ answer = apriori.aprioriLogic()
 
 print '='*20
 for each in answer:
-	print each
+	print each.getItemSet()
 
 
 # Generate Association rules
 for a in answer:
-	for i in range(1,length(a.getItemSet())):
+	for i in range(1,len(a.getItemSet())):
 		S = a.getItemSet()
 		sub =  set(itertools.combinations(S, m))
 		for s in sub:

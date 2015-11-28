@@ -25,5 +25,5 @@ class ItemsetGenerator:
 			eachMember.setSupportCount(count)
 			if eachMember.getSupportCount()>self.minSup:
 				#print ', '.join(eachMember.getItemSet()) + ' : '+ str(eachMember.getSupportCount())
-				largeItemset.append(eachMember.getItemSet())
+				largeItemset.append(eachMember)#.getItemSet())
 		return largeItemset
