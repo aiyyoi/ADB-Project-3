@@ -75,5 +75,5 @@ for a in answer:
 				if flag1 == 1:
 					break
 
-		if(float(sup_l) / sup_subs >= minConf
+		if float(sup_l) / sup_subs >= minConf:
 			print ', '.join(s) + "=>" + ', '.join(diff)
