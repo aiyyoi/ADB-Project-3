@@ -36,7 +36,7 @@ with open(filePath, 'rU') as csvFile:
 # should skip first row
 baskets.pop(0)
 ## changed into absolute minimum support and confidence count
-minSup = math.floor(len(baskets)*minSup)
+minSup = len(baskets)*minSup
 print 'Absolute minimum support count: '+ str(minSup)
 print 'Minimum confidence: ' + str(minConf)
 
@@ -51,28 +51,30 @@ print 'Generating set of large itemsets ...'
 apriori = Apriori.AprioriInstance(baskets, minSup, iniCanItemset)
 answer = apriori.aprioriLogic()
 
-print '='*20
-for each in answer:
-	print each.getItemSet() + ' support: '+ str(float(each.getSupportCount())/len(baskets))
 
+print "===Frequent itemsets (min_sup=" + str(minSup * 100/len(baskets)) + "%)"
+for each in answer:
+	print "[" + ', '.join(each.getItemSet()) + "]" + ' support: '+ str(float(each.getSupportCount() * 100)/len(baskets)) + "%"
+
+print "===High-confidence association rules (min_conf=" + str(minConf*100) + "%)"
 
 # Generate Association rules
 for a in answer:
 	for i in range(1,len(a.getItemSet())):
-		S = a.getItemSet()
-		sub =  set(itertools.combinations(S, m))
+		S = set(a.getItemSet())
+		sub =  set(itertools.combinations(S, i))
 		for s in sub:
-			diff = S.difference(sub)
+			diff = S.difference(s)	
 			sup_l = a.getSupportCount()
 			sup_subs = 0
 			flag1 = 0
 		
-			for j in answer:
-				if set(j) == set(s):
-					sup_subs = j.getSupportCount()
+			for j in answer:	
+				if set(j.getItemSet()) == set(s):
+					sup_subs = j.getSupportCount()	
 					flag1 = 1	
 				if flag1 == 1:
 					break
 
-		if float(sup_l) / sup_subs >= minConf:
-			print ', '.join(s) + "=>" + ', '.join(diff)
+			if float(sup_l) / sup_subs >= minConf:
+				print "[" + ', '.join(s) +  "]" + " => " + "[" + ', '.join(diff) + "] (Conf: " + str(float(sup_l) * 100 / sup_subs) + "%, Supp: " + str(float(sup_l) * 100 /len(baskets)) + "%)"
