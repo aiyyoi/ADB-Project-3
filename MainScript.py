@@ -53,7 +53,7 @@ answer = apriori.aprioriLogic()
 
 print '='*20
 for each in answer:
-	print each.getItemSet()
+	print each.getItemSet() + ' support: '+ str(float(each.getSupportCount())/len(baskets))
 
 
 # Generate Association rules

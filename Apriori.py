@@ -14,6 +14,7 @@ class AprioriInstance:
 	def aprioriLogic(self):
 		answer = [] # all large itemsets found are to be appended
 		ptLargeItemset = self.iniLargeItemset
+		answer.extend(self.iniLargeItemset)
 		while len(ptLargeItemset) >0:
 			last = []
 			for eachMember in ptLargeItemset:
