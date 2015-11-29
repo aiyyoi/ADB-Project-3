@@ -52,11 +52,13 @@ apriori = Apriori.AprioriInstance(baskets, minSup, iniCanItemset)
 answer = apriori.aprioriLogic()
 
 
-print "===Frequent itemsets (min_sup=" + str(minSup * 100/len(baskets)) + "%)"
-for each in answer:
-	print "[" + ', '.join(each.getItemSet()) + "]" + ' support: '+ str(float(each.getSupportCount() * 100)/len(baskets)) + "%"
 
-print "===High-confidence association rules (min_conf=" + str(minConf*100) + "%)"
+output = open('output.txt', 'w')
+output.write( "\n===Frequent itemsets (min_sup=" + str(minSup * 100/len(baskets)) + "%)\n\n" )
+for each in answer:
+	output.write( "[" + ', '.join(each.getItemSet()) + "]" + ' support: '+ str(float(each.getSupportCount() * 100)/len(baskets)) + "%\n")
+
+output.write( "\n===High-confidence association rules (min_conf=" + str(minConf*100) + "%)\n\n" )
 
 # Generate Association rules
 for a in answer:
@@ -77,4 +79,6 @@ for a in answer:
 					break
 
 			if float(sup_l) / sup_subs >= minConf:
-				print "[" + ', '.join(s) +  "]" + " => " + "[" + ', '.join(diff) + "] (Conf: " + str(float(sup_l) * 100 / sup_subs) + "%, Supp: " + str(float(sup_l) * 100 /len(baskets)) + "%)"
+				output.write( "[" + ', '.join(s) +  "]" + " => " + "[" + ', '.join(diff) + "] (Conf: " + str(float(sup_l) * 100 / sup_subs) + "%, Supp: " + str(float(sup_l) * 100 /len(baskets)) + "%)\n" )
+
+output.close()
