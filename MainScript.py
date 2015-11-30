@@ -66,7 +66,9 @@ for a in answer:
 		S = set(a.getItemSet())
 		sub =  set(itertools.combinations(S, i))
 		for s in sub:
-			diff = S.difference(s)	
+			diff = S.difference(s)
+			if len(diff) != 1:
+				continue	
 			sup_l = a.getSupportCount()
 			sup_subs = 0
 			flag1 = 0
