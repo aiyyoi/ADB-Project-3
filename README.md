@@ -63,5 +63,25 @@ From this dataset, we expected to derive high confidence assocation rules that c
 
 **Apriori.py** : #TODO
 
+## Interesting Parameters and REsults
+An interesting set of parameters used is as follows:
+Minimum support : 0.05
+Minimum confidence : 0.8
+
+This set of parameters results in a large number of high-confidence rules. Some interesting rules obtained are a follows:
+
+[$65, RegState-NY, $35, PlateType-PAS] => [Muni Meter --
+(37) Parking in excess of the allowed time
+(38) Failing to show a receipt or tag in the windshield
+Drivers get a 5-minute grace period past the expired time on Muni-Meter receipts.] (Conf: 99.9924374196%, Supp: 20.1810217196%)
+
+This rules tells us that if a car is Registered in NY and has a PAS plate and has paid a fine of either $65 below 96th street or $35 in other areas, then the violation committed is most likely (37) or (38).
+
+Another example of an interesting rule we obtained is as follows:
+
+[VehicleBodyType-SUBN] => [PlateType-PAS] (Conf: 83.7701379789%, Supp: 33.1745959064%)
+
+If a vehicle has a suburban body type, it is highly likely to have a PAS plate type. This is interesting because we can predict the plate type of a vehicle from the body type (in this case, a suburban body type is highly likely to have a PAS plate type).
+
 ## References
-1. Ipeirotis, Panagiotis, and Luis Gravano. "QProber: A system for automatic classification of hidden-web databases." (2003).
+1. Rakesh Agrawal and Ramakrishnan Srikant: Fast Algorithms for Mining Association Rules in Large Databases, VLDB 1994.
