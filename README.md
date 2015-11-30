@@ -23,14 +23,14 @@ Akshaan Kakar, UNI: ak3808
 
 ## Dataset Generation 
 The dataset we decided to use for this project was created by joining to datasets from the NYC open dataset repositories. These were as follows:
-1. Parking violation codes [https://data.cityofnewyork.us/Transportation/DOF-Parking-Violation-Codes/ncbg-6agr]
-2. Parking violations in the fiscal year 2013-2014 [https://data.cityofnewyork.us/City-Government/Parking-Violations-Issued-Fiscal-Year-2014-August-/jt7v-77mi]
+1. [Parking violation codes] (https://data.cityofnewyork.us/Transportation/DOF-Parking-Violation-Codes/ncbg-6agr)
+2. [Parking violations in the fiscal year 2013-2014] (https://data.cityofnewyork.us/City-Government/Parking-Violations-Issued-Fiscal-Year-2014-August-/jt7v-77mi)
 
 We joined the two files on the violation code field so that we could have the description of each parking violation as well as the dollar value of the fine for each violation against each violation incident decribed in the second dataset.
 
 We then dropped columns that were uninteresting or redundant and retained only the following columns:  
 1. RegistrationState - State in which vehicle is registered  
-2. PlateType - Type of license plate [http://www.nyc.gov/html/dof/html/pdf/faq/stars_codes.pdf]  
+2. [PlateType - Type of license plate] (http://www.nyc.gov/html/dof/html/pdf/faq/stars_codes.pdf)  
 3. ViolationCode - Parking violation code  
 4. VehicleBodyType - Type of vehicle (Sedan, SUV etc.)
 5. VehicleMake - Name of Vehicle manufacturer  
