@@ -13,12 +13,27 @@ Akshaan Kakar, UNI: ak3808
 
 ### List of Files in Submission
 <pre><code>
+dyn-160-39-204-75:ADB-Project-3 AmyWang$ tree
+.
+├── Apriori.py
+├── Apriori.pyc
+├── CandidateGenerator.py
+├── CandidateGenerator.pyc
+├── LargeItemsetGenerator.py
+├── LargeItemsetGenerator.pyc
+├── MainScript.py
+├── MemberClass.py
+├── MemberClass.pyc
+├── README.md
+├── integrated-dataset.csv
+└── example-run.txt
 
+0 directories, 13 files
 </code></pre>
 
 ### Compile/ Run Instructions
 1. From terminal, change file path to the project root folder
-2. To run:<pre><code>python MainScript.py -data ./integrated-dataset.csv  -msuo 0.25 -mconf 0.8</code></pre>
+2. To run:<pre><code>python MainScript.py -data integrated-dataset.csv -msup 0.25 -mconf 0.8</code></pre>
 4. The output will be written to a file named output.txt
 
 ## Dataset Generation 
@@ -51,19 +66,19 @@ From this dataset, we expected to derive high confidence assocation rules that c
 
 
 ## Internal Design
-**MainScript.py** : The main script starts by parsing input arguments: URL of the dataset, support and confidence threshold value for Apriori algorithm implementation, and delegates to **LargeItemsetGenerator** class. It then takes the returned large itemsets and extracts the final, high-confidence association rules from them. This is done as described in the reference paper on the Apriori Algorithm. Every subset a of every large itemset l is considered and those subsets with support(l)/support(a) > minconf are output as high confidence rules a => (l-a). Since we only wanted rules with one item on the right, we did not consider subsets for which (l-a) is larger than on element.
+**MainScript.py** : The main script starts by parsing input arguments: URL of the dataset, support and confidence threshold value for Apriori algorithm implementation, and delegates to **Apriori** class. It then takes the returned large itemsets and extracts the final, high-confidence association rules from them. This is done as described in the reference paper on the Apriori Algorithm. Every subset a of every large itemset l is considered and those subsets with support(l)/support(a) > minconf are output as high confidence rules a => (l-a). Since we only wanted rules with one item on the right, we did not consider subsets for which (l-a) is larger than on element.
 
 **MemberClass** : This wrapper class is used to hold the large item sets and their corresponding support count values. The objects of this class have two attributes  
 1. A list that holds the items belonging to the itemset.
 2. An integer denoting the absolute support count of this itemset.
 
-**LargeItemsetGenerator** :  #TODO
+**LargeItemsetGenerator** : This class essentially is a high pass filter that takes in candidate itemsets and output collection of the members that have minimum support. The implementation takes care of generation process in one iteration.
 
-**CandidateItemsetGenerator** : #TODO
+**CandidateItemsetGenerator** : This class takes in large itemsets from last iteration of *k* and generate all possible candidate itemsets for **LargeItemsetGenerator** as in [1]. The implementation takes care of generation process in one iteration.
 
-**Apriori.py** : #TODO
+**Apriori.py** : The main logic of Apriori algorithm. It iterates from *k=1* till no more large itemsets can be found. Each iteration has two steps: generate candidates at *k* with **CandidateItemsetGenerator** and generate large itemsets through **LargeItemsetGenerator** and append to results.
 
-## Interesting Parameters and REsults
+## Interesting Parameters and Results
 An interesting set of parameters used is as follows:
 Minimum support : 0.05
 Minimum confidence : 0.8
