@@ -59,7 +59,9 @@ From this dataset, we expected to derive high confidence assocation rules that c
 
 **LargeItemsetGenerator** :  #TODO
 
-**QProberClass** : #TODO
+**CandidateItemsetGenerator** : #TODO
+
+**Apriori.py** : #TODO
 
 ## References
 1. Ipeirotis, Panagiotis, and Luis Gravano. "QProber: A system for automatic classification of hidden-web databases." (2003).
